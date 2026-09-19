@@ -1,0 +1,48 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+
+public class InventarioMaterias {
+    public static void main(String[] args) {
+        
+        ArrayList<String> listaBase = new ArrayList<>();
+        listaBase.add("Programación Estructurada");
+        listaBase.add("Bases de datos");
+        listaBase.add("Redes de Computadores");
+        listaBase.add("Sistemas Operativos");
+
+       
+        String[] arregloProveedor = {
+            "Piloto de IoT",
+            "Inteligencia Artificial",
+            "Piloto de filosofía",
+            "Seguridad Informática"
+        };
+
+       
+        ArrayList<String> listaConsolidada = new ArrayList<>(listaBase);
+        listaConsolidada.addAll(Arrays.asList(arregloProveedor));
+
+        
+        System.out.println("LISTA CONSOLIDADA ANTES DE DEPURAR (Total: " + listaConsolidada.size() + ")");
+        for (String materia : listaConsolidada) {
+            System.out.println(materia);
+        }
+        System.out.println();
+
+       
+        Iterator<String> iterador = listaConsolidada.iterator();
+        while (iterador.hasNext()) {
+            String materia = iterador.next();
+            if (materia.startsWith("Piloto")) {
+                iterador.remove();
+            }
+        }
+
+       
+        System.out.println("LISTA DESPUÉS DE ELIMINAR LAS QUE EMPIEZAN CON \"Piloto\" (Total: " + listaConsolidada.size() + ")");
+        for (String materia : listaConsolidada) {
+            System.out.println(materia);
+        }
+    }
+}
