@@ -1,0 +1,155 @@
+import java.util.LinkedList;
+
+/**
+ *
+ * @author prestamo
+ */
+public class Listasenlazadas21sept {
+
+    public static void main(String[] args) {
+        LinkedList<String> materias = new LinkedList<>();
+        
+        materias.add("Calculo");
+        materias.add("Programacion");
+        materias.add("Metodologia");
+        materias.add("Ingles");
+        materias.add("Fisica");
+        materias.add("Bases de datos");
+        
+        System.out.println("=== LISTA INICIAL ===");
+        materias.forEach(System.out::println);
+        
+        // ==========================================
+        // 2. AGREGAR INFORMACIÓN
+        // ==========================================
+        // AGREGAR ALGORITMO AL INICIO DE LA LISTA
+        materias.addFirst("Algoritmos");
+        
+        System.out.println("\n--- Se agrego Algoritmo al Inicio de la Lista ---");
+        materias.forEach(System.out::println);
+        
+        materias.addLast("Inteligencia Artificial");
+        
+        System.out.println("\n--- DESPUES DE AGREGAR AL FINAL ---");
+        System.out.println(materias);
+        
+        // AGREGAR ESTRUCTURA DE DATOS A LA POSICION 2
+        materias.add(2, "Estructura de datos");
+        System.out.println("\n--- DESPUES DE INSERTAR EN POSICION 2 ---");
+        System.out.println(materias);
+        
+        // ==========================================
+        // 3. CONSULTAR INFORMACIÓN
+        // ==========================================
+        System.out.println("\n=== CONSULTAR INFORMACIÓN ===");
+        System.out.println("LA MATERIA QUE ESTA EN LA POSICION 3 ES: " + materias.get(3));
+        
+        // CONSULTAR ULTIMO Y PRIMER ELEMENTO DE LA LISTA 
+        System.out.println("El primer elemento de la lista es: " + materias.getFirst());
+        System.out.println("El ultimo elemento de la lista es: " + materias.getLast());
+        
+        if (materias.contains("Ingles")) {
+            System.out.println("La lista contiene Ingles");
+        } else {
+            System.out.println("La lista no contiene Ingles");
+        }
+        
+        int posicion = materias.indexOf("Bases de datos");
+        if (posicion != -1) {
+            System.out.println("La posicion de las Bases de datos es: " + posicion);
+        } else {
+            System.out.println("Ese elemento no se encuentra en la lista materias");
+        }
+        
+        // ==========================================
+        // 4. MODIFICAR INFORMACIÓN
+        // ==========================================
+        System.out.println("\n=== 4. MODIFICAR INFORMACIÓN ===");
+        System.out.println("Lista ANTES de modificar: " + materias);
+        
+        // Localizar "Programacion" (o la materia que prefieras, en este caso buscamos Programacion o Calculo)
+        int indexMatematicas = materias.indexOf("Programacion");
+        if (indexMatematicas != -1) {
+            materias.set(indexMatematicas, "Programacion Avanzada");
+            System.out.println("Se modifico 'Programacion' por 'Programacion Avanzada'.");
+        } else {
+            System.out.println("El elemento no fue encontrado para modificar.");
+        }
+        System.out.println("Lista DESPUÉS de modificar: " + materias);
+
+        // ==========================================
+        // 5. ELIMINAR INFORMACIÓN
+        // ==========================================
+        System.out.println("\n=== 5. ELIMINAR INFORMACIÓN ===");
+        
+        // Eliminar "Ingles" utilizando su nombre
+        materias.remove("Ingles");
+        System.out.println("Despues de eliminar 'Ingles': " + materias);
+        
+        // Eliminar un elemento utilizando su posición (por ejemplo, índice 1)
+        materias.remove(1);
+        System.out.println("Despues de eliminar el elemento en la posicion 1: " + materias);
+        
+        // Eliminar el primer elemento
+        materias.removeFirst();
+        System.out.println("Despues de eliminar el primer elemento: " + materias);
+        
+        // Eliminar el último elemento
+        materias.removeLast();
+        System.out.println("Despues de eliminar el ultimo elemento: " + materias);
+
+        // ==========================================
+        // 6. RECORRER LA COLECCIÓN
+        // ==========================================
+        System.out.println("\n=== 6. RECORRER LA COLECCIÓN ===");
+        
+        System.out.println("Recorrido con ciclo 'for tradicional':");
+        for (int i = 0; i < materias.size(); i++) {
+            System.out.println("- " + materias.get(i));
+        }
+        
+        System.out.println("\nRecorrido con ciclo 'for-each':");
+        for (String m : materias) {
+            System.out.println("- " + m);
+        }
+
+        // ==========================================
+        // 7. CONTAR Y VERIFICAR
+        // ==========================================
+        System.out.println("\n=== 7. CONTAR Y VERIFICAR ===");
+        System.out.println("Cantidad de elementos actuales: " + materias.size());
+        
+        if (materias.isEmpty()) {
+            System.out.println("La lista esta vacia.");
+        } else {
+            System.out.println("La lista contiene informacion.");
+        }
+
+        // ==========================================
+        // 8. ELIMINAR TODOS LOS ELEMENTOS
+        // ==========================================
+        System.out.println("\n=== 8. ELIMINAR TODOS LOS ELEMENTOS ===");
+        materias.clear();
+        System.out.println("Lista despues de .clear(): " + materias);
+        System.out.println("¿La lista esta vacia?: " + materias.isEmpty());
+
+        // ==========================================
+        // RETO ADICIONAL
+        // ==========================================
+        System.out.println("\n=== RETO ADICIONAL ===");
+        materias.add("Etica");
+        materias.add("Piloto Java");
+        materias.add("Estadistica");
+        materias.add("Piloto Python");
+        materias.add("Piloto Web");
+        
+        System.out.println("Lista con materias y 'Piloto':");
+        System.out.println(materias);
+        
+        // Eliminar únicamente las que comiencen por "Piloto" usando removeIf
+        materias.removeIf(m -> m.startsWith("Piloto"));
+        
+        System.out.println("Lista final limpia (sin materias 'Piloto'):");
+        System.out.println(materias);
+    }
+}
