@@ -1,0 +1,197 @@
+package com.mycompany.inventariopoo;
+
+// Nodo auxiliar para armar la lista enlazada
+class Nodo {
+    Product producto;
+    Nodo siguiente;
+
+    public Nodo(Product producto) {
+        this.producto = producto;
+        this.siguiente = null;
+    }
+}
+
+public class InventarioPOO {
+    private Nodo cabeza; // Inicio de la lista enlazada
+
+    // CONSTRUCTOR CORREGIDO (Debe llamarse igual que la clase)
+    public InventarioPOO() {
+        this.cabeza = null;
+    }
+
+    // 4. Agregar producto al INICIO de la lista
+    public void agregarInicio(Product p) {
+        Nodo nuevo = new Nodo(p);
+        nuevo.siguiente = cabeza;
+        cabeza = nuevo;
+    }
+
+    // 4. Agregar producto al FINAL de la lista
+    public void agregarFinal(Product p) {
+        Nodo nuevo = new Nodo(p);
+        if (cabeza == null) {
+            cabeza = nuevo;
+        } else {
+            Nodo actual = cabeza;
+            while (actual.siguiente != null) {
+                actual = actual.siguiente;
+            }
+            actual.siguiente = nuevo;
+        }
+    }
+
+    // 5. Consultar la cantidad total de elementos
+    public int contarElementos() {
+        int contador = 0;
+        Nodo actual = cabeza;
+        while (actual != null) {
+            contador++;
+            actual = actual.siguiente;
+        }
+        return contador;
+    }
+
+    // 5. Consultar el primer elemento
+    public Product obtenerPrimero() {
+        if (cabeza == null) return null;
+        return cabeza.producto;
+    }
+
+    // 5. Consultar el último elemento
+    public Product obtenerUltimo() {
+        if (cabeza == null) return null;
+        Nodo actual = cabeza;
+        while (actual.siguiente != null) {
+            actual = actual.siguiente;
+        }
+        return actual.producto;
+    }
+
+    // 5. Consultar un elemento en una posición específica (índice desde 0)
+    public Product obtenerPorPosicion(int index) {
+        Nodo actual = cabeza;
+        int contador = 0;
+        while (actual != null) {
+            if (contador == index) {
+                return actual.producto;
+            }
+            contador++;
+            actual = actual.siguiente;
+        }
+        return null;
+    }
+
+    // 6. Recorrer y mostrar todos los elementos de la lista
+    public void mostrarLista() {
+        if (cabeza == null) {
+            System.out.println("El inventario está vacío.");
+            return;
+        }
+        Nodo actual = cabeza;
+        int i = 0;
+        while (actual != null) {
+            System.out.println("  [Posición " + i + "] ID: " + actual.producto.getId() + 
+                               " | Nombre: " + actual.producto.getNombre() + 
+                               " | Precio: $" + actual.producto.getPrecio() + 
+                               " | Stock: " + actual.producto.getExistencia());
+            actual = actual.siguiente;
+            i++;
+        }
+    }
+
+    // 7. Buscar un producto por ID
+    public Product buscarPorId(int idBuscado) {
+        Nodo actual = cabeza;
+        while (actual != null) {
+            if (actual.producto.getId() == idBuscado) {
+                return actual.producto;
+            }
+            actual = actual.siguiente;
+        }
+        return null;
+    }
+
+    // 9. Eliminar el primer elemento de la lista
+    public void eliminarInicio() {
+        if (cabeza != null) {
+            cabeza = cabeza.siguiente;
+        }
+    }
+
+    // 9. Eliminar el último elemento de la lista
+    public void eliminarFinal() {
+        if (cabeza == null) return;
+        if (cabeza.siguiente == null) {
+            cabeza = null;
+            return;
+        }
+        Nodo actual = cabeza;
+        while (actual.siguiente.siguiente != null) {
+            actual = actual.siguiente;
+        }
+        actual.siguiente = null;
+    }
+
+    // ==========================================
+    // MÉTODO PRINCIPAL (EJECUCIÓN PASO A PASO)
+    // ==========================================
+    public static void main(String[] args) {
+        InventarioPOO inventario = new InventarioPOO();
+
+        System.out.println("--- 1 y 2. CREACIÓN DE OBJETOS Y USO DE GET/SET ---");
+        Product prod1 = new Product();
+        prod1.setId(101);
+        prod1.setNombre("Manzana");
+        prod1.setPrecio(1500.0);
+        prod1.setExistencia(50);
+
+        Product prod2 = new Product(102, "Pera", 1800.0, 40);
+        Product prod3 = new Product(103, "Banano", 800.0, 60);
+        Product prod4 = new Product(104, "Fresa", 3000.0, 25);
+        Product prod5 = new Product(105, "Uva", 4500.0, 30);
+
+        System.out.println("Probando Get en prod1 -> Nombre: " + prod1.getNombre() + ", Precio: " + prod1.getPrecio());
+
+        System.out.println("\n--- 3 y 4. CREAR LISTA E INSERTAR (INICIO Y FINAL) ---");
+        inventario.agregarFinal(prod1);  
+        inventario.agregarFinal(prod2);  
+        inventario.agregarInicio(prod3); 
+        inventario.agregarFinal(prod4);  
+        inventario.agregarFinal(prod5);  
+
+        System.out.println("\n--- 6. RECORRER Y MOSTRAR LA LISTA ---");
+        inventario.mostrarLista();
+
+        System.out.println("\n--- 5. CONSULTAR EXTREMOS, POSICIÓN Y CANTIDAD ---");
+        System.out.println("Cantidad total de productos: " + inventario.contarElementos());
+        System.out.println("Primer producto: " + inventario.obtenerPrimero().getNombre());
+        System.out.println("Último producto: " + inventario.obtenerUltimo().getNombre());
+        System.out.println("Producto en la posición 2: " + inventario.obtenerPorPosicion(2).getNombre());
+
+        System.out.println("\n--- 7. BUSCAR UN PRODUCTO POR ID ---");
+        int idBusqueda = 104;
+        Product encontrado = inventario.buscarPorId(idBusqueda);
+        if (encontrado != null) {
+            System.out.println("¡Encontrado! -> ID: " + encontrado.getId() + " | Nombre: " + encontrado.getNombre());
+        } else {
+            System.out.println("Producto con ID " + idBusqueda + " no fue encontrado.");
+        }
+
+        System.out.println("\n--- 8. MODIFICAR INFORMACIÓN DE UN PRODUCTO ---");
+        System.out.println("Antes de modificar -> Stock de Fresa (ID 104): " + prod4.getExistencia());
+        prod4.setExistencia(35);
+        prod4.setPrecio(3200.0);
+        System.out.println("Después de modificar -> Nuevo Stock: " + prod4.getExistencia() + " | Nuevo Precio: $" + prod4.getPrecio());
+
+        System.out.println("\n--- 9. ELIMINAR ELEMENTOS AL INICIO Y AL FINAL ---");
+        System.out.println("Inventario antes de eliminar:");
+        inventario.mostrarLista();
+
+        inventario.eliminarInicio(); 
+        inventario.eliminarFinal();  
+
+        System.out.println("\nInventario después de eliminar el inicio y el final:");
+        inventario.mostrarLista();
+        System.out.println("Cantidad final de elementos: " + inventario.contarElementos());
+    }
+}
