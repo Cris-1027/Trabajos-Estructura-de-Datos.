@@ -1,0 +1,60 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package tallerprioridad;
+
+import java.util.PriorityQueue;
+
+class Paciente implements Comparable<Paciente> {
+    private String nombre;
+    private int gravedad; // 1 = Crítico (mayor prioridad), 5 = Leve (menor prioridad)
+
+    public Paciente(String nombre, int gravedad) {
+        this.nombre = nombre;
+        this.gravedad = gravedad;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getGravedad() {
+        return gravedad;
+    }
+
+    @Override
+    public int compareTo(Paciente otro) {
+        // En Java Min-Heap, menor valor numérico representa mayor prioridad
+        return Integer.compare(this.gravedad, otro.gravedad);
+    }
+
+    @Override
+    public String toString() {
+        return nombre + " (Nivel de gravedad: " + gravedad + ")";
+    }
+}
+
+public class SalaEmergencias {
+
+    public static void main(String[] args) {
+
+        PriorityQueue<Paciente> sala = new PriorityQueue<>();
+
+        // Ingreso de pacientes a urgencias con diferentes prioridades
+        sala.offer(new Paciente("Ana Lopez", 3));       // Moderado
+        sala.offer(new Paciente("Pedro Gomez", 1));     // Crítico
+        sala.offer(new Paciente("Maria Rodriguez", 4)); // Bajo
+        sala.offer(new Paciente("Juan Perez", 2));      // Alto
+
+        System.out.println("=== ATENCIÓN EN SALA DE EMERGENCIAS ===");
+        System.out.println("Pacientes en espera: " + sala.size());
+        System.out.println();
+
+        // Atender a los pacientes según su prioridad clínica
+        while (!sala.isEmpty()) {
+            Paciente siguiente = sala.poll();
+            System.out.println("Atendiendo a: " + siguiente);
+        }
+    }
+}
