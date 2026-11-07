@@ -1,0 +1,47 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package tallerprioridad;
+
+import java.util.PriorityQueue;
+import java.util.Comparator;
+
+public class PrioridadPalabras {
+
+    public static void main(String[] args) {
+
+        // Cola de prioridad natural (Orden alfabético A-Z)
+        PriorityQueue<String> colaAlfabetica = new PriorityQueue<>();
+
+        // Tus datos personales
+        colaAlfabetica.offer("Cristian");
+        colaAlfabetica.offer("Soacha");
+        colaAlfabetica.offer("Informatica"); // Usamos Informatica sin tilde para evitar detalles de codificación
+        colaAlfabetica.offer("Ingles");
+
+        System.out.println("--- Orden Natural (Alfabético A-Z) ---");
+        System.out.println("Arreglo interno (Heap): " + colaAlfabetica);
+        System.out.print("Extraccion con poll(): ");
+        while (!colaAlfabetica.isEmpty()) {
+            System.out.print(colaAlfabetica.poll() + " ");
+        }
+        System.out.println("\n");
+
+        // Cola de prioridad inversa (Orden alfabético Z-A)
+        PriorityQueue<String> colaInversa = new PriorityQueue<>(Comparator.reverseOrder());
+
+        colaInversa.offer("Cristian");
+        colaInversa.offer("Soacha");
+        colaInversa.offer("Informatica");
+        colaInversa.offer("Ingles");
+
+        System.out.println("--- Orden Inverso (Alfabético Z-A) ---");
+        System.out.println("Arreglo interno (Heap): " + colaInversa);
+        System.out.print("Extraccion con poll(): ");
+        while (!colaInversa.isEmpty()) {
+            System.out.print(colaInversa.poll() + " ");
+        }
+        System.out.println();
+    }
+}
