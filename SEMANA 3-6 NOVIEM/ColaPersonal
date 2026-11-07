@@ -1,0 +1,48 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package tallerprioridad;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class ColaPersonal {
+
+    public static void main(String[] args) {
+
+        Queue<Integer> cola = new LinkedList<>();
+
+        // MISMOS 3 datos: número de lista (8), día (11), mes (8)
+        cola.offer(8);
+        imprimirCola(cola);
+
+        cola.offer(11);
+        imprimirCola(cola);
+
+        cola.offer(8);
+        imprimirCola(cola);
+
+        // Atender al primero con poll()
+        Integer atendido = cola.poll();
+        System.out.println("Se atendio " + atendido);
+        imprimirCola(cola);
+
+        // Vaciar la cola de forma segura con isEmpty() y poll()
+        while (!cola.isEmpty()) {
+            Integer elem = cola.poll();
+            System.out.println("Se atendio " + elem);
+            imprimirCola(cola);
+        }
+    }
+
+    private static void imprimirCola(Queue<Integer> cola) {
+        if (cola.isEmpty()) {
+            System.out.println("La cola esta vacia\n");
+        } else {
+            System.out.println("Tamano: " + cola.size());
+            System.out.println("Cabeza: " + cola.peek());
+            System.out.println("Contenido: " + cola + "  <- la cabeza es el de la izquierda\n");
+        }
+    }
+}
