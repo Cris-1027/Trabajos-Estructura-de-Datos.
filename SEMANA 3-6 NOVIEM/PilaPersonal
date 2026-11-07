@@ -1,0 +1,42 @@
+package tallerprioridad;
+
+import java.util.Stack;
+
+public class PilaPersonal {
+
+    public static void main(String[] args) {
+
+        Stack<Integer> pila = new Stack<>();
+
+        // Datos personales: número de lista (8), día (11), mes (8)
+        pila.push(8);   // Número de lista
+        imprimirPila(pila);
+
+        pila.push(11);  // Día de cumpleaños
+        imprimirPila(pila);
+
+        pila.push(8);   // Mes de cumpleaños
+        imprimirPila(pila);
+
+        // Buscar el número de lista (8)
+        int pos = pila.search(8);
+        System.out.println("Posicion de mi numero de lista: " + pos);
+        System.out.println();
+
+        // Vaciar la pila de forma segura
+        while (!pila.empty()) {
+            int elemento = pila.pop();
+            System.out.println("Se saco " + elemento);
+            imprimirPila(pila);
+        }
+    }
+
+    private static void imprimirPila(Stack<Integer> pila) {
+        if (pila.empty()) {
+            System.out.println("La pila esta vacia\n");
+        } else {
+            System.out.println("Cima: " + pila.peek());
+            System.out.println("Contenido: " + pila + "  <- la cima es el de la derecha\n");
+        }
+    }
+}
